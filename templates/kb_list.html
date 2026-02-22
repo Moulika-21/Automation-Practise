@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KB List</title>
+</head>
+<body>
+    <h2>Expired Knowledge Base Articles</h2>
+
+    <ul>
+        {% for kb in kb_data %}
+            <li>
+                <a href="{{ url_for('kb_detail', kb_id=kb.id) }}">
+                    {{ kb.kb_number }} - {{ kb.title }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KB Detail</title>
+</head>
+<body>
+
+<h2>KB Details</h2>
+
+<p><strong>KB Number:</strong> {{ kb.kb_number }}</p>
+<p><strong>Author:</strong> {{ kb.author }}</p>
+<p><strong>Category:</strong> {{ kb.category }}</p>
+
+<label><strong>Valid To:</strong></label>
+<input type="date" id="validTo" value="{{ kb.valid_to }}">
+
+<h3>Article Body</h3>
+<textarea id="articleBody" rows="6" cols="60">
+{{ kb.body }}
+</textarea>
+
+<h3>Attachments</h3>
+<div id="attachments">
+    {% if kb.attachments %}
+        {% for file in kb.attachments %}
+            <p>
+                <a href="{{ file.url }}" class="attachment-link">
+                    {{ file.name }}
+                </a>
+                <button class="delete-attachment">Delete</button>
+            </p>
+        {% endfor %}
+    {% else %}
+        <p>No Attachments</p>
+    {% endif %}
+</div>
+
+
+<br><br>
+
+<a href="{{ url_for('publish_kb', kb_id=kb.id) }}">
+    <button id="publishButton">Publish</button>
+</a>
+
+</body>
+</html>
