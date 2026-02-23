@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <title>KB Detail</title>
@@ -41,6 +41,187 @@
 <a href="{{ url_for('publish_kb', kb_id=kb.id) }}">
     <button id="publishButton">Publish</button>
 </a>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KB Detail</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 1000px;
+            margin: 40px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header h2 {
+            margin: 0;
+        }
+
+        .header-buttons button {
+            margin-left: 10px;
+            padding: 6px 14px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .publish { background-color: #ebeff5; color: rgb(21, 18, 18); }
+        .revalidate { background-color: #e4e9f1; color: rgb(40, 36, 36); }
+        .update { background-color: #e7e8ee; color: rgb(21, 13, 13); }
+        .delete { background-color: #e8e1e1; color: rgb(20, 16, 16); }
+
+        /* Two Column Layout */
+        .details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .column {
+            width: 48%;
+        }
+
+        .field {
+            margin-bottom: 15px;
+        }
+
+        .field label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+
+        .field input {
+            width: 100%;
+            padding: 6px;
+        }
+
+        /* Article */
+        .section-title {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+        }
+
+        #attachments p {
+            margin: 6px 0;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- HEADER -->
+    <div class="header">
+        <h2>{{ kb.kb_number }}</h2>
+
+        <div class="header-buttons">
+            <button class="publish" id="publishButton">Publish</button>
+            <button class="revalidate">Revalidate</button>
+            <button class="update">Update</button>
+            <button class="delete">Delete</button>
+        </div>
+    </div>
+
+    <!-- LEFT & RIGHT FIELDS -->
+    <div class="details">
+
+        <!-- LEFT -->
+        <div class="column">
+
+            <div class="field">
+                <label>Number</label>
+                <input type="text" value="{{ kb.kb_number }}" readonly>
+            </div>
+
+            <div class="field">
+                <label>Category</label>
+                <input type="text" value="{{ kb.category }}" readonly>
+            </div>
+
+            <div class="field">
+                <label>Valid To</label>
+                <input type="date" id="validTo" value="{{ kb.valid_to }}">
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="column">
+
+            <div class="field">
+                <label>Version</label>
+                <input type="text" value="1.0" readonly>
+            </div>
+
+            <div class="field">
+                <label>Author</label>
+                <input type="text" value="{{ kb.author }}" readonly>
+            </div>
+
+            <div class="field">
+                <label>Workflow</label>
+                <input type="text" value="Draft" readonly>
+            </div>
+
+            <div class="field">
+                <label>Parent</label>
+                <input type="text" value="N/A" readonly>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ARTICLE BODY -->
+    <div class="section-title">Article Body</div>
+    <textarea id="articleBody" rows="6">
+{{ kb.body }}
+    </textarea>
+
+    <!-- ATTACHMENTS -->
+    <div class="section-title">Attachments</div>
+    <div id="attachments">
+        {% for file in kb.attachments %}
+        <p>
+            <a href="{{ file.url }}" class="attachment-link">
+                {{ file.name }}
+            </a>
+        </p>
+        {% endfor %}
+    </div>
+
+</div>
 
 </body>
 </html>

@@ -21,6 +21,21 @@ kb_data = [
                 "url": "https://example.com/password_reset.pdf"
             }
         ]
+    },
+    {
+        "id": 2,
+        "kb_number": "KB002",
+        "title": "How to Update Profile Information",
+        "author": "Moulika",
+        "category": "User Management",
+        "valid_to": "2025-12-29",
+        "body": "This article explains how to update your profile information.",
+        "attachments": [
+            {
+                "name": "Profile_Update_Guide.pdf",
+                "url": "https://example.com/profile_update.pdf"
+            }
+        ]
     }
 ]
 
@@ -42,3 +57,11 @@ if __name__ == "__main__":
     app.run(debug=True)
     
 
+# if uploaded_file.filename.lower().endswith(".doc") or uploaded_file.filename.lower().endswith(".docx"):
+#     converter.convert_doc_to_html(input_path, output_path)
+
+# elif uploaded_file.filename.lower().endswith(".pdf"):
+#     converter.convert_pdf_to_html(input_path, output_path)
+
+# else:
+#     return jsonify({"error": "Unsupported file format"}), 400

@@ -2,18 +2,73 @@
 <html>
 <head>
     <title>KB List</title>
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            text-align: left;
+            padding: 12px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        a {
+            text-decoration: none;
+            color: #1e3c72;
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
     <h2>Expired Knowledge Base Articles</h2>
 
-    <ul>
+    <table>
+    <thead>
+        <tr>
+            <th>Knowledge Base</th>
+            <th>Number</th>
+            <th>Short Description</th>
+            <th>Author</th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for kb in kb_data %}
-            <li>
+        <tr>
+            <td>P&SC - Public</td>
+            <td>
                 <a href="{{ url_for('kb_detail', kb_id=kb.id) }}">
-                    {{ kb.kb_number }} - {{ kb.title }}
+                    {{ kb.kb_number }}
                 </a>
-            </li>
+            </td>
+            <td>{{ kb.title }}</td>
+            <td>{{ kb.author }}</td>
+            <td>{{ kb.category }}</td>
+        </tr>
         {% endfor %}
-    </ul>
+    </tbody>
+</table>
+
 </body>
 </html>
